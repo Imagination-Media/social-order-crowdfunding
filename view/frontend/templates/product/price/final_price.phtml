@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * Social Order
+ *
+ * This extension adds the feature to share an order with other people and also create the "donation" product type.
+ *
+ * @package ImaginationMedia\SocialOrder
+ * @author Igor Ludgero Miura <igor@imaginationmedia.com>
+ * @copyright Copyright (c) 2018 Imagination Media (https://www.imaginationmedia.com/)
+ * @license https://opensource.org/licenses/OSL-3.0.php Open Software License 3.0
+ */
+
+?>
+
+<?php /** @var \ImaginationMedia\SocialOrder\Pricing\Render\FinalPriceBox $block */ ?>
+<?php $productId = $block->getSaleableItem()->getId(); ?>
+
+<div class="price-box">
+    <?php if ($block->isMinEqualToMax()): ?>
+        <p>
+        <span class="price" id="product-price-<?php /* @escapeNotVerified */
+        echo $productId ?><?php /* @escapeNotVerified */
+        echo $block->getIdSuffix() ?>">
+            <?php /* @escapeNotVerified */
+            echo $block->convertAndFormatCurrency($block->getMinValue(), false) ?>
+        </span>
+        </p>
+    <?php elseif ($block->getMinValue() !== 0): ?>
+        <p>
+            <span class="price-label"><?php /* @escapeNotVerified */
+                echo __('From') ?></span>
+            <span class="price" id="min-product-price-<?php /* @escapeNotVerified */
+            echo $productId ?><?php /* @escapeNotVerified */
+            echo $block->getIdSuffix() ?>">
+            <?php /* @escapeNotVerified */
+            echo $block->convertAndFormatCurrency($block->getMinValue(), false) ?>
+            </span>
+            <?php if ($block->getMaxValue() !== 0): ?>
+                <span class="price-label"><?php /* @escapeNotVerified */
+                    echo __('To') ?></span>
+                <span class="price" id="max-product-price-<?php /* @escapeNotVerified */
+                echo $productId ?><?php /* @escapeNotVerified */
+                echo $block->getIdSuffix() ?>">
+                <?php /* @escapeNotVerified */
+                echo $block->convertAndFormatCurrency($block->getMaxValue(), false) ?>
+                </span>
+            <?php endif; ?>
+        </p>
+    <?php endif; ?>
+    <p>
+        <span class="price-label"><?php /* @escapeNotVerified */
+            echo __('Amount To Reach') ?></span>
+        <span class="price" id="amount-to-reach-<?php /* @escapeNotVerified */
+        echo $productId ?><?php /* @escapeNotVerified */
+        echo $block->getIdSuffix() ?>">
+            <?php /* @escapeNotVerified */
+            echo $block->convertAndFormatCurrency($block->getAmountToReach(), false) ?>
+        </span>
+    </p>
+</div>

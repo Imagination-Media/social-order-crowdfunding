@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Social Order
+ *
+ * This extension adds the feature to share an order with other people and also create the "donation" product type.
+ *
+ * @package ImaginationMedia\SocialOrder
+ * @author Igor Ludgero Miura <igor@imaginationmedia.com>
+ * @copyright Copyright (c) 2018 Imagination Media (https://www.imaginationmedia.com/)
+ * @license https://opensource.org/licenses/OSL-3.0.php Open Software License 3.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/cron_groups.xsd">
+    <group id="socialorder_check_orders_to_invoice">
+        <schedule_generate_every>1</schedule_generate_every>
+        <schedule_ahead_for>4</schedule_ahead_for>
+        <schedule_lifetime>2</schedule_lifetime>
+        <history_cleanup_every>10</history_cleanup_every>
+        <history_success_lifetime>60</history_success_lifetime>
+        <history_failure_lifetime>600</history_failure_lifetime>
+        <use_separate_process>1</use_separate_process>
+    </group>
+</config>

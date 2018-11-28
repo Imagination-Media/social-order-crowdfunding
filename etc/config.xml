@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Social Order
+ *
+ * This extension adds the feature to share an order with other people and also create the "donation" product type.
+ *
+ * @package ImaginationMedia\SocialOrder
+ * @author Igor Ludgero Miura <igor@imaginationmedia.com>
+ * @copyright Copyright (c) 2018 Imagination Media (https://www.imaginationmedia.com/)
+ * @license https://opensource.org/licenses/OSL-3.0.php Open Software License 3.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <socialorder>
+                <active>1</active>
+                <model>ImaginationMedia\SocialOrder\Model\Payment</model>
+                <order_status>pending</order_status>
+                <title>Share Order</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </socialorder>
+        </payment>
+    </default>
+</config>

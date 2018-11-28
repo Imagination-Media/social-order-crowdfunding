@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Social Order
+ *
+ * This extension adds the feature to share an order with other people and also create the "donation" product type.
+ *
+ * @package ImaginationMedia\SocialOrder
+ * @author Igor Ludgero Miura <igor@imaginationmedia.com>
+ * @copyright Copyright (c) 2018 Imagination Media (https://www.imaginationmedia.com/)
+ * @license https://opensource.org/licenses/OSL-3.0.php Open Software License 3.0
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="ImaginationMedia_SocialOrder::css/styles.css"/>
+    </head>
+    <body>
+        <attribute name="class" value="imaginationmedia-socialorder-donation"/>
+        <referenceBlock name="product.price.final">
+            <arguments>
+                <argument name="render_form" xsi:type="string">1</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="product.info.type">
+            <block class="ImaginationMedia\SocialOrder\Block\Product\View\Type\Donation" as="product.info.donation"
+                   template="ImaginationMedia_SocialOrder::product/view/type/default.phtml" />
+        </referenceContainer>
+        <referenceContainer name="product.info.form.content">
+            <block class="ImaginationMedia\SocialOrder\Block\Product\View\Type\Donation" name="product.donation.fields"
+                   template="ImaginationMedia_SocialOrder::product/view/price/donation.phtml" before="addtocart" />
+        </referenceContainer>
+        <referenceBlock name="render.product.prices" remove="true" />
+    </body>
+</page>

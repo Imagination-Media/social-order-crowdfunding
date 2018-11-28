@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Social Order
+ *
+ * This extension adds the feature to share an order with other people and also create the "donation" product type.
+ *
+ * @package ImaginationMedia\SocialOrder
+ * @author Igor Ludgero Miura <igor@imaginationmedia.com>
+ * @copyright Copyright (c) 2018 Imagination Media (https://www.imaginationmedia.com/)
+ * @license https://opensource.org/licenses/OSL-3.0.php Open Software License 3.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Observer to create the shareable products -->
+    <event name="checkout_cart_product_add_after">
+        <observer name="social_order_add_to_cart_after" instance="ImaginationMedia\SocialOrder\Observer\CheckoutCartAddObserver" />
+    </event>
+</config>

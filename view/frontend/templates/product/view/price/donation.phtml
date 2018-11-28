@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * Social Order
+ *
+ * This extension adds the feature to share an order with other people and also create the "donation" product type.
+ *
+ * @package ImaginationMedia\SocialOrder
+ * @author Igor Ludgero Miura <igor@imaginationmedia.com>
+ * @copyright Copyright (c) 2018 Imagination Media (https://www.imaginationmedia.com/)
+ * @license https://opensource.org/licenses/OSL-3.0.php Open Software License 3.0
+ */
+
+/**
+ * @var $this \ImaginationMedia\SocialOrder\Block\Product\View\Type\Donation
+ */
+
+?>
+
+<div class="donation-info">
+    <div id="progress-container" class="donation-item">
+        <strong><?= $this->getPercentage() ?></strong>
+    </div>
+    <div class="donation-item">
+        <?php $productId = $this->getProduct()->getId(); ?>
+
+        <div class="price-box">
+            <?php if ($this->isMinEqualToMax()): ?>
+                <p>
+        <span class="price" id="product-price-<?php /* @escapeNotVerified */
+        echo $productId ?>">
+            <?php /* @escapeNotVerified */
+            echo $this->convertAndFormatCurrency($this->getMinValue(), false) ?>
+        </span>
+                </p>
+            <?php elseif ($this->getMinValue() !== 0): ?>
+                <p>
+            <span class="price-label"><?php /* @escapeNotVerified */
+                echo __('From') ?></span>
+                    <span class="price" id="min-product-price-<?php /* @escapeNotVerified */
+                    echo $productId ?>">
+            <?php /* @escapeNotVerified */
+            echo $this->convertAndFormatCurrency($this->getMinValue(), false) ?>
+            </span>
+                    <?php if ($this->getMaxValue() !== 0): ?>
+                        <span class="price-label"><?php /* @escapeNotVerified */
+                            echo __('To') ?></span>
+                        <span class="price" id="max-product-price-<?php /* @escapeNotVerified */
+                        echo $productId ?>">
+                <?php /* @escapeNotVerified */
+                echo $this->convertAndFormatCurrency($this->getMaxValue(), false) ?>
+                </span>
+                    <?php endif; ?>
+                </p>
+            <?php endif; ?>
+            <p>
+        <span class="price-label"><?php /* @escapeNotVerified */
+            echo __('Amount To Reach') ?></span>
+                <span class="price" id="amount-to-reach-<?php /* @escapeNotVerified */
+                echo $productId ?>">
+            <?php /* @escapeNotVerified */
+            echo $this->convertAndFormatCurrency($this->getAmountToReach(), false) ?>
+        </span>
+            </p>
+            <p>
+        <span class="price-label"><?php /* @escapeNotVerified */
+            echo __('Remaining Amount') ?></span>
+                <span class="price" id="amount-remaining-<?php /* @escapeNotVerified */
+                echo $productId ?>">
+            <?php /* @escapeNotVerified */
+            echo $this->convertAndFormatCurrency($this->getRemainingAmount(), false) ?>
+        </span>
+            </p>
+        </div>
+    </div>
+</div>
+<?php if ($this->getProduct()->isSalable()): ?>
+    <div id="donation-amount-box" class="field required open-amount">
+        <div class="control">
+            <label for="donation-amount-input" id="amount-label-input" class="label">
+                <span><?php /* @escapeNotVerified */
+                    echo __('Amount in %1', $this->getCurrentCurrency()); ?><em>*</em></span>
+            </label>
+            <input type="text" id="donation-amount-input" name="custom_donation_amount" class="input-text"
+                   data-validate="{number: true,required: true, min: <?= $this->getMinValue() ?>, max: <?= $this->getMaxValue() ?>}"
+                   value="<?php echo $this->escapeHtml($this->getMinValue()) ?>"/>
+        </div>
+    </div>
+<?php endif; ?>
+<script>
+    require(["jquery", "progressBar"], function ($, ProgressBar) {
+        var percentage = parseFloat("<?= $this->getPercentage() ?>");
+        $('#progress-container').circleProgress({
+            value: percentage,
+            size: 190,
+            fill: {gradient: [['#0681c4', .5], ['#4ac5f8', .5]], gradientAngle: Math.PI / 4}
+        }).on('circle-animation-progress', function (event, progress, stepValue) {
+            $(this).find('strong').html(Math.round((percentage * 100) * progress) + '<i>%</i>');
+        });
+    });
+</script>

@@ -1,0 +1,43 @@
+<?php
+
+use ImaginationMedia\SocialOrder\Setup\InstallData;
+use Magento\Catalog\Model\Product;
+
+/**
+ * Social Order
+ *
+ * This extension adds the feature to share an order with other people and also create the "donation" product type.
+ *
+ * @package ImaginationMedia\SocialOrder
+ * @author Igor Ludgero Miura <igor@imaginationmedia.com>
+ * @copyright Copyright (c) 2018 Imagination Media (https://www.imaginationmedia.com/)
+ * @license https://opensource.org/licenses/OSL-3.0.php Open Software License 3.0
+ */
+
+/**
+ * @var $this \ImaginationMedia\SocialOrder\Block\Customer\Account\Orders\ListView
+ */
+
+$products = $this->getSharedItems();
+
+?>
+
+<table style="width:100%">
+    <tr>
+        <th><?= __('Sku') ?></th>
+        <th><?= __('Name') ?></th>
+        <th><?= __('Target') ?></th>
+        <th><?= __('Created At') ?></th>
+        <th><?= __('Status') ?></th>
+    </tr>
+    <?php /** @var $product Product */ ?>
+    <?php foreach ($products as $product): ?>
+        <tr>
+            <td><a href="<?= $product->getProductUrl() ?>"><?= $product->getSku() ?></a></td>
+            <td><?= $product->getName() ?></td>
+            <td><?= $product->getData(InstallData::DONATION_TARGET_AMOUNT) ?></td>
+            <td><?= $product->getCreatedAt() ?></td>
+            <td><?php if ((int)$product->getStatus() === 1) { echo __("Available"); } else { echo __("Unavailable"); } ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
