@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Use Magento 2 to build a crow-funding website or add the feature to share an order with other people.
+Use Magento 2 to build a crowdfunding website or add the feature to share an order with other people.
 
   - Add donation product type.
   - Add 'Share Order' payment method.
