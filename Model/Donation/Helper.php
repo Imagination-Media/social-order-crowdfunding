@@ -93,7 +93,7 @@ class Helper extends BasicHelper
      */
     public function createShareableProduct(Order $order) : bool
     {
-        $total = $order->getSubtotalInclTax();
+        $total = $order->getGrandTotal();
         $productData = array(
             "sku" => "shared_" .
                 str_replace(" ", "", strtolower($order->getCustomerFirstname())) . "_" .

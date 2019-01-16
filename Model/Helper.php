@@ -244,9 +244,7 @@ class Helper
          */
         $items->join(
             array('order' => $orderTable),
-            'main_table.order_id = order.entity_id 
-            AND order.customer_firstname IS NOT NULL 
-            AND order.customer_lastname IS NOT NULL',
+            'main_table.order_id = order.entity_id',
             array('entity_id', 'increment_id', 'customer_email', 'customer_firstname', 'customer_lastname')
         );
 
