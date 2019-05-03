@@ -44,9 +44,9 @@ class DataProvider extends AbstractDataProvider
 
     /**
      * DataProvider constructor.
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string|null $name
+     * @param string|null $primaryFieldName
+     * @param string|null $requestFieldName
      * @param Helper $helper
      * @param Session $session
      * @param array $addFieldStrategies
